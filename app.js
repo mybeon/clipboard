@@ -1,7 +1,7 @@
 const { app, BrowserWindow, Menu } = require("electron");
 const path = require("path");
 
-const isDev = process.env.ELECTRON_ENV === "development";
+const isDev = process.env.ELECTRON_ENV !== "development";
 
 const menu = [
     {
@@ -17,7 +17,7 @@ const menu = [
 function createMainWindow() {
     const mainWindow = new BrowserWindow({
         title: "clipboard",
-        width: isDev ? 850 : 500,
+        width: isDev ? 600 : 350,
         height: 600,
         webPreferences: {
             nodeIntegration: true,

@@ -1,3 +1,5 @@
+import truncate from "./utils/truncate.js";
+import formatDate from "./utils/formatDate.js";
 const list = document.querySelector("#list");
 let prevText;
 const content = [];
@@ -5,10 +7,17 @@ const content = [];
 setInterval(() => {
     const text = context.readClipboard();
     if (prevText !== text && !content.includes(text)) {
-        const el = document.createElement("li");
+        const element = `
+        <li>
+            <img src="./assets/icons/doc.svg" />
+            <div class="content">
+                <p>${truncate(text)}</p>
+                <span>${formatDate(Date.now())}</span>
+            </div>
+        </li>
+        `;
         content.push(text);
-        el.innerText = text;
-        list.insertAdjacentElement("afterbegin", el);
+        list.insertAdjacentHTML("afterbegin", element);
         prevText = text;
         return;
     }
