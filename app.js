@@ -1,7 +1,16 @@
 const { app, BrowserWindow, Menu } = require("electron");
 const path = require("path");
 
-const isDev = process.env.ELECTRON_ENV !== "development";
+app.commandLine.appendSwitch("ignore-gpu-blacklist");
+app.commandLine.appendSwitch("disable-gpu");
+app.commandLine.appendSwitch("disable-gpu-compositing");
+
+const isDev = process.env.ELECTRON_ENV === "development";
+
+const webPreferences = {
+    nodeIntegration: true,
+    preload: path.join(__dirname, "preload.js"),
+};
 
 const menu = [
     {
@@ -19,10 +28,8 @@ function createMainWindow() {
         title: "clipboard",
         width: isDev ? 600 : 350,
         height: 600,
-        webPreferences: {
-            nodeIntegration: true,
-            preload: path.join(__dirname, "preload.js"),
-        },
+        webPreferences,
+        resizable: false,
     });
 
     if (isDev) {
@@ -37,6 +44,9 @@ function createAboutWindow() {
         title: "aboutWindow",
         width: 200,
         height: 200,
+        frame: false,
+        webPreferences,
+        resizable: false,
     });
 
     aboutWindow.loadFile(path.join(__dirname, "./renderer/about.html"));
