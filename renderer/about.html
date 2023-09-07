@@ -3,9 +3,31 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>about</title>
+        <link rel="stylesheet" href="./style.css" />
+        <title>About</title>
+        <style>
+            body {
+                overflow: hidden;
+            }
+        </style>
     </head>
     <body>
-        <h1>about me</h1>
+        <div class="about">
+            <h1>Version:</h1>
+            <span></span>
+            <button class="btn" onclick="closeWindow()">close</button>
+            <a href="https://github.com/mybeon/clipboard.git">Github</a>
+        </div>
+        <script>
+            function closeWindow() {
+                let my_window = open(location, "_self");
+                my_window.close();
+            }
+            document.querySelector("span").innerText = context.version;
+            document.querySelector("a").addEventListener("click", (e) => {
+                e.preventDefault();
+                context.openUrl(e.target.href);
+            });
+        </script>
     </body>
 </html>

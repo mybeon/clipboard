@@ -162,3 +162,8 @@ li span {
     align-items: center;
     padding: 30px 10px;
 }
+
+.about a {
+    font-size: 12px;
+    color: var(--text-color);
+}
