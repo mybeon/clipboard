@@ -1,19 +1,35 @@
 {
-    "name": "electrontest",
+    "name": "clipboard",
     "version": "1.0.0",
-    "description": "",
+    "description": "This app is a straightforward and user-friendly clipboard management app designed to help you never lose track of your clipboard history. You can easily access previously copied text, making your copy-paste tasks more efficient than ever.",
     "main": "app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "dev": "ELECTRON_ENV=development electronmon ."
+        "dev": "NODE_ENV=development electronmon .",
+        "pack": "electron-builder --dir",
+        "dist": "electron-builder"
+    },
+    "build": {
+        "appId": "com.beonma.clipboard",
+        "productName": "clipboard",
+        "copyright": "© 2023, beonma inc.",
+        "linux": {
+            "target": [
+                "deb"
+            ],
+            "synopsis": "a simple yet practical clipboard",
+            "category": "Utility"
+        }
     },
     "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "electron": "^26.1.0"
+    "author": {
+        "name": "beonma",
+        "email": "beonline.ma@gmail.com"
     },
+    "license": "ISC",
     "devDependencies": {
+        "electron": "^26.1.0",
+        "electron-builder": "^24.6.4",
         "electronmon": "^2.0.2"
     }
 }

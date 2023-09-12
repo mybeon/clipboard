@@ -5,7 +5,7 @@ app.commandLine.appendSwitch("ignore-gpu-blacklist");
 app.commandLine.appendSwitch("disable-gpu");
 app.commandLine.appendSwitch("disable-gpu-compositing");
 
-const isDev = process.env.ELECTRON_ENV === "development";
+const isDev = process.env.NODE_ENV === "development";
 
 const webPreferences = {
     nodeIntegration: true,
