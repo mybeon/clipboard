@@ -4,7 +4,6 @@
     "description": "This app is a straightforward and user-friendly clipboard management app designed to help you never lose track of your clipboard history. You can easily access previously copied text, making your copy-paste tasks more efficient than ever.",
     "main": "app.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "NODE_ENV=development electronmon .",
         "pack": "electron-builder --dir",
         "dist": "electron-builder"

@@ -1,5 +1,6 @@
-const { app, BrowserWindow, Menu } = require("electron");
+const { app, BrowserWindow, Menu, nativeImage, Tray } = require("electron");
 const path = require("path");
+const fs = require("fs/promises");
 
 app.commandLine.appendSwitch("ignore-gpu-blacklist");
 app.commandLine.appendSwitch("disable-gpu");
@@ -23,7 +24,18 @@ const menu = [
     },
 ];
 
+const contextMenu = Menu.buildFromTemplate([
+    { label: "View app", type: "normal", click: createMainWindow },
+    { type: "separator" },
+    { label: "Quit", type: "normal", click: () => app.quit() },
+]);
+
 function createMainWindow() {
+    // setting up the main menu
+    const mainMenu = Menu.buildFromTemplate(menu);
+    Menu.setApplicationMenu(mainMenu);
+
+    // creating the window
     const mainWindow = new BrowserWindow({
         title: "clipboard",
         width: isDev ? 600 : 350,
@@ -52,8 +64,15 @@ function createAboutWindow() {
     aboutWindow.loadFile(path.join(__dirname, "./renderer/about.html"));
 }
 
+async function createTray() {
+    const iconPath = path.join(__dirname, "/build/icons/512x512.png");
+    const icon = nativeImage.createFromPath(iconPath);
+    const tray = new Tray(icon);
+    tray.setContextMenu(contextMenu);
+}
+
 app.whenReady().then(() => {
-    createMainWindow();
-    const mainMenu = Menu.buildFromTemplate(menu);
-    Menu.setApplicationMenu(mainMenu);
+    createTray();
 });
+
+app.on("window-all-closed", () => {});
