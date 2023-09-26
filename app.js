@@ -1,17 +1,14 @@
-const { app, BrowserWindow, Menu, nativeImage, Tray } = require("electron");
+const { app, Menu, nativeImage, Tray } = require("electron");
 const path = require("path");
-const fs = require("fs/promises");
+const createWindow = require("./utils/createWindow");
 
 app.commandLine.appendSwitch("ignore-gpu-blacklist");
 app.commandLine.appendSwitch("disable-gpu");
 app.commandLine.appendSwitch("disable-gpu-compositing");
 
+let mainWindow;
+let aboutWindow;
 const isDev = process.env.NODE_ENV === "development";
-
-const webPreferences = {
-    nodeIntegration: true,
-    preload: path.join(__dirname, "preload.js"),
-};
 
 const menu = [
     {
@@ -31,41 +28,45 @@ const contextMenu = Menu.buildFromTemplate([
 ]);
 
 function createMainWindow() {
-    // setting up the main menu
-    const mainMenu = Menu.buildFromTemplate(menu);
-    Menu.setApplicationMenu(mainMenu);
+    if (!mainWindow) {
+        // setting up the main menu
+        mainMenu = Menu.buildFromTemplate(menu);
+        Menu.setApplicationMenu(mainMenu);
 
-    // creating the window
-    const mainWindow = new BrowserWindow({
-        title: "clipboard",
-        width: isDev ? 600 : 350,
-        height: 600,
-        webPreferences,
-        resizable: false,
-    });
+        // creating the window
+        mainWindow = createWindow({
+            title: "home",
+            width: isDev ? 600 : 350,
+            height: 600,
+        });
 
-    if (isDev) {
-        mainWindow.webContents.openDevTools();
+        if (isDev) {
+            mainWindow.webContents.openDevTools();
+        }
+
+        mainWindow.once("closed", () => {
+            mainWindow = undefined;
+        });
     }
-
-    mainWindow.loadFile(path.join(__dirname, "./renderer/index.html"));
 }
 
 function createAboutWindow() {
-    const aboutWindow = new BrowserWindow({
-        title: "aboutWindow",
-        width: 200,
-        height: 200,
-        frame: false,
-        webPreferences,
-        resizable: false,
-    });
+    if (!aboutWindow) {
+        aboutWindow = createWindow({
+            title: "about",
+            width: 200,
+            height: 200,
+            frame: false,
+        });
 
-    aboutWindow.loadFile(path.join(__dirname, "./renderer/about.html"));
+        aboutWindow.once("closed", () => {
+            aboutWindow = undefined;
+        });
+    }
 }
 
 async function createTray() {
-    const iconPath = path.join(__dirname, "/build/icons/512x512.png");
+    const iconPath = path.join(__dirname, "/build/icons/tray_300x300.png");
     const icon = nativeImage.createFromPath(iconPath);
     const tray = new Tray(icon);
     tray.setContextMenu(contextMenu);
