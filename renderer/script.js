@@ -2,21 +2,28 @@ import { ListElement } from "./models/User.js";
 const clearBtn = document.querySelector("#clear");
 
 export const list = document.querySelector("#list");
-export var prevText;
-export let content = [];
+let prevText;
 
 clearBtn.addEventListener("click", () => {
     list.innerHTML = null;
-    prevText = null;
-    content = [];
-    context.clearClipboard();
+    electronAPI.clearClipboard();
 });
 
-setInterval(() => {
-    const text = context.readClipboard();
-    if (text.trim() !== "" && prevText !== text && !content.includes(text)) {
-        new ListElement(text);
-        content.push(text);
-        prevText = text;
+window.addEventListener("DOMContentLoaded", async () => {
+    const content = await electronAPI.getClipboard();
+    content.forEach(el => {
+        new ListElement(el);
+    });
+    prevText = content[content.length - 1];
+});
+
+setInterval(async () => {
+    const content = await electronAPI.getClipboard();
+    if (content.length !== 0) {
+        const lastElement = content[content.length - 1];
+        if (prevText !== lastElement) {
+            new ListElement(lastElement);
+            prevText = lastElement;
+        }
     }
 }, 1000);

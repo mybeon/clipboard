@@ -1,5 +1,6 @@
-const { BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain, clipboard } = require("electron");
 const path = require("path");
+const clipboardManager = require("./clipboard");
 
 module.exports = function ({ title, width, height, frame = true, resizable = false }) {
     const window = new BrowserWindow({
@@ -9,12 +10,20 @@ module.exports = function ({ title, width, height, frame = true, resizable = fal
         frame,
         resizable,
         webPreferences: {
-            nodeIntegration: true,
-            preload: path.join(__dirname, "../preload.js"),
+            sandbox: true,
+            preload: path.join(app.getAppPath(), "preload.js"),
         },
+        show: false,
     });
 
-    window.loadFile(path.join(__dirname, `../renderer/${title}.html`));
+    // show when loading is finished
+    window.webContents.on("did-finish-load", () => {
+        window.show();
+        window.focus();
+    });
+
+    // load file
+    window.loadFile(path.join(app.getAppPath(), "renderer", `${title}.html`));
 
     return window;
 };

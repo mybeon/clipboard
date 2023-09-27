@@ -8,6 +8,7 @@ app.commandLine.appendSwitch("disable-gpu-compositing");
 
 let mainWindow;
 let aboutWindow;
+
 const isDev = process.env.NODE_ENV === "development";
 
 const menu = [
@@ -87,3 +88,5 @@ app.whenReady().then(() => {
 });
 
 app.on("window-all-closed", () => {});
+
+require("./utils/clipboard");

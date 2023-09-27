@@ -30,7 +30,7 @@ export class ListElement {
     }
 
     onClick(e) {
-        context.writeClipboard(this.text);
+        // electronAPI.writeToClipboard(this.text);
         notification.classList.add("active");
         setTimeout(() => {
             notification.classList.remove("active");
