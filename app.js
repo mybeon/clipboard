@@ -17,7 +17,17 @@ const menu = [
     },
     {
         label: "Help",
-        submenu: [{ label: "About", click: createAboutWindow }],
+        submenu: [
+            {
+                label: "Learn more",
+                click: async () => {
+                    const { shell } = require("electron");
+                    await shell.openExternal("https://github.com/mybeon/clipboard");
+                },
+            },
+            { type: "separator" },
+            { label: "About", click: createAboutWindow },
+        ],
     },
 ];
 
