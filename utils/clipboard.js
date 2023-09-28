@@ -1,4 +1,4 @@
-const { clipboard, ipcMain } = require("electron");
+const { clipboard, ipcMain, shell, app } = require("electron");
 
 let content = [];
 
@@ -20,4 +20,12 @@ ipcMain.on("clipboard:write", (_, text) => {
 ipcMain.on("clipboard:clear", () => {
     content = [];
     clipboard.clear();
+});
+
+ipcMain.on("open-url", (_, url) => {
+    shell.openExternal(url);
+});
+
+ipcMain.handle("version", () => {
+    return app.getVersion();
 });

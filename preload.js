@@ -4,12 +4,6 @@ contextBridge.exposeInMainWorld("electronAPI", {
     getClipboard: () => ipcRenderer.invoke("clipboard:get"),
     writeToClipboard: text => ipcRenderer.send("clipboard:write", text),
     clearClipboard: () => ipcRenderer.send("clipboard:clear"),
+    openUrl: url => ipcRenderer.send("open-url", url),
+    version: () => ipcRenderer.invoke("version"),
 });
-
-// contextBridge.exposeInMainWorld("context", {
-//     readClipboard: () => clipboard.readText(),
-//     writeClipboard: text => clipboard.writeText(text),
-//     clearClipboard: () => clipboard.clear(),
-//     openUrl: url => shell.openExternal(url),
-//     version: process.env.npm_package_version,
-// });
