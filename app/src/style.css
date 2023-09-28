@@ -1,10 +1,10 @@
 @font-face {
     font-family: "Ubuntu";
-    src: url("./assets/fonts/Ubuntu-Regular.ttf");
+    src: url("/fonts/Ubuntu-Regular.ttf");
 }
 @font-face {
     font-family: "Ubuntu-light";
-    src: url("./assets/fonts/Ubuntu-Light.ttf");
+    src: url("/fonts/Ubuntu-Light.ttf");
 }
 *,
 *::before,

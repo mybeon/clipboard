@@ -5,6 +5,8 @@
     "main": "app/electron/app.js",
     "private": true,
     "scripts": {
+        "vite:dev": "vite",
+        "vite:build": "vite build",
         "dev": "NODE_ENV=development electronmon .",
         "pack": "electron-builder --dir",
         "dist": "electron-builder"
@@ -30,6 +32,8 @@
     "devDependencies": {
         "electron": "^26.2.3",
         "electron-builder": "^24.6.4",
-        "electronmon": "^2.0.2"
+        "electronmon": "^2.0.2",
+        "terser": "^5.20.0",
+        "vite": "^4.4.9"
     }
 }

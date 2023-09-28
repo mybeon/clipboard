@@ -15,7 +15,7 @@ export class ListElement {
     init() {
         const element = `
         <li data-content="${this.text}" id="${this.id}">
-            <img src="./assets/icons/doc.svg" />
+            <img src="/icons/doc.svg" />
             <div class="content">
                 <p>${truncate(this.text)}</p>
                 <span>${formatDate(Date.now())}</span>

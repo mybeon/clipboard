@@ -18,14 +18,15 @@
             <button class="btn">close</button>
             <a href="https://github.com/mybeon/clipboard.git">Github</a>
         </div>
-        <script type="module">
+        <script>
             document.querySelector(".btn").addEventListener("click", e => {
                 e.preventDefault();
                 let my_window = open(location, "_self");
                 my_window.close();
             });
-            const version = await electronAPI.version();
-            document.querySelector("span").innerText = version;
+            electronAPI.version().then(version => {
+                document.querySelector("span").innerText = version;
+            });
             document.querySelector("a").addEventListener("click", e => {
                 e.preventDefault();
                 electronAPI.openUrl(e.target.href);
