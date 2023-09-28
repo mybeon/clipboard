@@ -11,6 +11,9 @@
         "pack": "electron-builder --dir",
         "dist": "electron-builder"
     },
+    "electronmon": {
+        "patterns": ["!app/src", "!app/build"]
+    },
     "build": {
         "appId": "com.beonma.clipboard",
         "productName": "clipboard",

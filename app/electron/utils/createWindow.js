@@ -22,7 +22,13 @@ module.exports = function ({ title, width, height, frame = true, resizable = fal
     });
 
     // load file
-    window.loadFile(path.join(app.getAppPath(), "app", "src", `${title}.html`));
+    const isDev = process.env.NODE_ENV === "development";
+
+    if (isDev) {
+        window.loadURL(`http://localhost:3000/${title}.html`);
+    } else {
+        window.loadFile(path.join(app.getAppPath(), "app", "build", `${title}.html`));
+    }
 
     return window;
 };
