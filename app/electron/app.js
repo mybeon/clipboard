@@ -77,7 +77,7 @@ function createAboutWindow() {
 }
 
 async function createTray() {
-    const iconPath = path.join(__dirname, "/build/icons/tray_300x300.png");
+    const iconPath = path.join(app.getAppPath(), "/build/icons/tray_300x300.png");
     const icon = nativeImage.createFromPath(iconPath);
     const tray = new Tray(icon);
     tray.setContextMenu(contextMenu);

@@ -1,6 +1,5 @@
-const { app, BrowserWindow, ipcMain, clipboard } = require("electron");
+const { app, BrowserWindow } = require("electron");
 const path = require("path");
-const clipboardManager = require("./clipboard");
 
 module.exports = function ({ title, width, height, frame = true, resizable = false }) {
     const window = new BrowserWindow({
@@ -11,7 +10,7 @@ module.exports = function ({ title, width, height, frame = true, resizable = fal
         resizable,
         webPreferences: {
             sandbox: true,
-            preload: path.join(app.getAppPath(), "preload.js"),
+            preload: path.join(app.getAppPath(), "app", "electron", "preload.js"),
         },
         show: false,
     });
@@ -23,7 +22,7 @@ module.exports = function ({ title, width, height, frame = true, resizable = fal
     });
 
     // load file
-    window.loadFile(path.join(app.getAppPath(), "renderer", `${title}.html`));
+    window.loadFile(path.join(app.getAppPath(), "app", "src", `${title}.html`));
 
     return window;
 };
