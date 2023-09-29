@@ -14,4 +14,4 @@ Introducing a straightforward clipboard manager designed for efficiency and simp
 
 Whether you're a developer, writer, or anyone who frequently uses copy and paste, our Clipboard Manager simplifies your workflow by keeping your clipboard history at your fingertips.
 
-[Download Now](https://github.com/mybeon/clipboard/releases/download/v1.0.0/clipboard_1.0.0_amd64.deb) | [GitHub Repository](https://github.com/mybeon/clipboard)
+[Download Now](https://github.com/mybeon/clipboard/releases/download/v1.1.0/clipboard_1.1.0_amd64.deb) | [GitHub Repository](https://github.com/mybeon/clipboard)
