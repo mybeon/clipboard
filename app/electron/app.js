@@ -58,6 +58,8 @@ function createMainWindow() {
         mainWindow.once("closed", () => {
             mainWindow = undefined;
         });
+    } else {
+        mainWindow.show();
     }
 }
 
