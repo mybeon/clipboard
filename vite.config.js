@@ -2,7 +2,8 @@ import { resolve } from "path";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-    root: "app/src/",
+    root: "./app/src/",
+    base: "",
     server: {
         strictPort: true,
         port: 3000,

@@ -9,7 +9,7 @@ app.commandLine.appendSwitch("disable-gpu-compositing");
 let mainWindow;
 let aboutWindow;
 
-const isDev = process.env.NODE_ENV === "development";
+const isDev = process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test";
 
 const menu = [
     {
@@ -77,7 +77,13 @@ function createAboutWindow() {
 }
 
 async function createTray() {
-    const iconPath = path.join(app.getAppPath(), "/build/icons/tray_300x300.png");
+    const iconPath = path.join(
+        app.getAppPath(),
+        "app",
+        "electron",
+        "assets",
+        "tray_300x300.png"
+    );
     const icon = nativeImage.createFromPath(iconPath);
     const tray = new Tray(icon);
     tray.setContextMenu(contextMenu);

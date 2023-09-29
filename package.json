@@ -7,17 +7,24 @@
     "scripts": {
         "vite:dev": "vite",
         "vite:build": "vite build",
-        "dev": "NODE_ENV=development electronmon .",
-        "pack": "electron-builder --dir",
-        "dist": "electron-builder"
+        "dev": "npm run vite:dev & NODE_ENV=development electronmon .",
+        "dist:test": "npm run vite:build && NODE_ENV=test electron .",
+        "dist": "npm run vite:build && electron-builder --linux"
     },
     "electronmon": {
-        "patterns": ["!app/src", "!app/build"]
+        "patterns": [
+            "!app/src",
+            "!app/build"
+        ]
     },
     "build": {
         "appId": "com.beonma.clipboard",
         "productName": "clipboard",
         "copyright": "© 2023, beonma inc.",
+        "files": [
+            "app/build/**/*",
+            "app/electron/**/*"
+        ],
         "linux": {
             "target": [
                 "deb"
