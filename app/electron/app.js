@@ -1,4 +1,4 @@
-const { app, Menu, nativeImage, Tray } = require("electron");
+const { app, Menu, nativeImage, Tray, Notification } = require("electron");
 const path = require("path");
 const createWindow = require("./utils/createWindow");
 
@@ -93,6 +93,11 @@ async function createTray() {
 
 app.whenReady().then(() => {
     createTray();
+
+    new Notification({
+        title: "Clipboard is running",
+        body: "In the background keeping track of the clipboard history.",
+    }).show();
 });
 
 app.on("window-all-closed", () => {});
