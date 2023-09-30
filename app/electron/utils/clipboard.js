@@ -4,8 +4,8 @@ let content = [];
 
 setInterval(() => {
     const text = clipboard.readText();
-    if (text.trim() !== "" && !content.includes(text)) {
-        content.push(text);
+    if (text.trim() !== "" && !content.some(el => el.text === text)) {
+        content.push({ text, date: Date.now() });
     }
 }, 1000);
 

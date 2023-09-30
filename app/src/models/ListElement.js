@@ -3,9 +3,10 @@ import formatDate from "../utils/formatDate.js";
 import { list } from "../script.js";
 const notification = document.querySelector(".notification");
 
-export class ListElement {
-    constructor(text) {
+export default class {
+    constructor(text, date) {
         this.text = text;
+        this.date = date;
         this.id = Math.ceil(Math.random() * 100 * 100);
         this.init();
         this.insertedEl = document.getElementById(this.id);
@@ -18,7 +19,7 @@ export class ListElement {
             <img src="./icons/doc.svg" />
             <div class="content">
                 <p>${truncate(this.text)}</p>
-                <span>${formatDate(Date.now())}</span>
+                <span>${formatDate(this.date)}</span>
             </div>
         </li>
         `;
@@ -30,7 +31,6 @@ export class ListElement {
     }
 
     onClick(e) {
-        // electronAPI.writeToClipboard(this.text);
         notification.classList.add("active");
         setTimeout(() => {
             notification.classList.remove("active");
