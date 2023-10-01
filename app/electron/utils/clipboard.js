@@ -1,11 +1,18 @@
 const { clipboard, ipcMain, shell, app } = require("electron");
+const sanitizeHtml = require("sanitize-html");
 
 let content = [];
 
 setInterval(() => {
     const text = clipboard.readText();
-    if (text.trim() !== "" && !content.some(el => el.text === text)) {
-        content.push({ text, date: Date.now() });
+
+    const sanitizeInput = sanitizeHtml(text, {
+        allowedTags: [],
+        allowedAttributes: {},
+    });
+
+    if (sanitizeInput.trim() !== "" && !content.some(el => el.text === sanitizeInput)) {
+        content.push({ text: sanitizeInput, date: Date.now() });
     }
 }, 1000);
 
