@@ -63,7 +63,7 @@ function createMainWindow() {
 }
 
 function createAboutWindow() {
-    if (typeof aboutWindow === undefined) {
+    if (!aboutWindow) {
         aboutWindow = createWindow({
             title: "about",
             width: 200,
