@@ -24,8 +24,9 @@
         "productName": "clipboard",
         "copyright": "© 2023, beonma inc.",
         "files": [
-            "app/build/**/*",
-            "app/electron/**/*"
+            "app/renderer/build/**/*",
+            "app/electron/build/**/*",
+            "app/electron/assets/**/*"
         ],
         "linux": {
             "target": [
