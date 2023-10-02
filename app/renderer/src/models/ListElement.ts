@@ -1,15 +1,20 @@
-import truncate from "../utils/truncate.js";
-import formatDate from "../utils/formatDate.js";
-import { list } from "../script.js";
-const notification = document.querySelector(".notification");
+import truncate from "../utils/truncate";
+import formatDate from "../utils/formatDate";
+import { list } from "../script";
+const notification = <HTMLElement>document.querySelector(".notification");
 
 export default class {
-    constructor(text, date) {
+    text: string;
+    date: number;
+    id: number;
+    insertedEl: HTMLLIElement;
+
+    constructor(text: string, date: number) {
         this.text = text;
         this.date = date;
         this.id = Math.ceil(Math.random() * 100 * 100);
         this.init();
-        this.insertedEl = document.getElementById(this.id);
+        this.insertedEl = <HTMLLIElement>document.getElementById(this.id.toString());
         this.listener();
     }
 
@@ -30,7 +35,7 @@ export default class {
         this.insertedEl.addEventListener("click", this.onClick.bind(this));
     }
 
-    onClick(e) {
+    onClick() {
         notification.classList.add("active");
         setTimeout(() => {
             notification.classList.remove("active");

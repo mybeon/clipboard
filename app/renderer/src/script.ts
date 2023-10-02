@@ -1,11 +1,23 @@
 import ListElement from "./models/ListElement.js";
-const clearBtn = document.querySelector("#clear");
+const clearBtn = <HTMLElement>document.querySelector("#clear");
 
-export const list = document.querySelector("#list");
-let prevText;
+type ClipboardElement = {
+    text: string;
+    date: number;
+};
+
+type ElectronAPI = {
+    clearClipboard: () => void;
+    getClipboard: () => Promise<ClipboardElement[]>;
+};
+
+declare const electronAPI: ElectronAPI;
+
+export const list = <HTMLUListElement>document.querySelector("#list");
+let prevText: string | undefined;
 
 clearBtn.addEventListener("click", () => {
-    list.innerHTML = null;
+    list.innerHTML = "";
     electronAPI.clearClipboard();
 });
 
@@ -14,7 +26,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     content.forEach(el => {
         new ListElement(el.text, el.date);
     });
-    prevText = content[content.length - 1]?.text;
+    prevText = content[content.length - 1].text;
 });
 
 setInterval(async () => {

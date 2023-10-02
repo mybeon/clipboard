@@ -3,7 +3,7 @@ import { defineConfig } from "vite";
 
 export default defineConfig(({ command }) => {
     return {
-        root: "./app/src/",
+        root: "./app/renderer/src/",
         base: command === "serve" ? "/" : "",
         server: {
             strictPort: true,
@@ -15,8 +15,8 @@ export default defineConfig(({ command }) => {
             outDir: "../build/",
             rollupOptions: {
                 input: {
-                    main: resolve(__dirname, "app/src/home.html"),
-                    about: resolve(__dirname, "app/src/about.html"),
+                    main: resolve(__dirname, "app/renderer/src/home.html"),
+                    about: resolve(__dirname, "app/renderer/src/about.html"),
                 },
             },
         },
