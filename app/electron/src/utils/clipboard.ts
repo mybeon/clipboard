@@ -1,7 +1,12 @@
-const { clipboard, ipcMain, shell, app } = require("electron");
-const sanitizeHtml = require("sanitize-html");
+import { clipboard, ipcMain, shell, app } from "electron";
+import sanitizeHtml from "sanitize-html";
 
-let content = [];
+type ClipboardElement = {
+    text: string;
+    date: number;
+};
+
+let content: ClipboardElement[] = [];
 
 setInterval(() => {
     const text = clipboard.readText();

@@ -1,17 +1,17 @@
-const { app, Menu, nativeImage, Tray, Notification } = require("electron");
-const path = require("path");
-const createWindow = require("./utils/createWindow");
+import { app, Menu, nativeImage, Tray, Notification, BrowserWindow } from "electron";
+import path from "path";
+import createWindow from "./utils/createWindow";
 
 app.commandLine.appendSwitch("ignore-gpu-blacklist");
 app.commandLine.appendSwitch("disable-gpu");
 app.commandLine.appendSwitch("disable-gpu-compositing");
 
-let mainWindow;
-let aboutWindow;
+let mainWindow: BrowserWindow | undefined;
+let aboutWindow: BrowserWindow | undefined;
 
 const isDev = process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test";
 
-const menu = [
+const mainMenu = Menu.buildFromTemplate([
     {
         label: "File",
         submenu: [{ label: "Quit", click: () => app.quit(), accelerator: "CMDorCTRL+w" }],
@@ -30,7 +30,7 @@ const menu = [
             { label: "About", click: createAboutWindow },
         ],
     },
-];
+]);
 
 const contextMenu = Menu.buildFromTemplate([
     { label: "View app", type: "normal", click: createMainWindow },
@@ -41,7 +41,6 @@ const contextMenu = Menu.buildFromTemplate([
 function createMainWindow() {
     if (!mainWindow) {
         // setting up the main menu
-        mainMenu = Menu.buildFromTemplate(menu);
         Menu.setApplicationMenu(mainMenu);
 
         // creating the window
@@ -59,12 +58,12 @@ function createMainWindow() {
             mainWindow = undefined;
         });
     } else {
-        mainWindow.show();
+        mainWindow?.show();
     }
 }
 
 function createAboutWindow() {
-    if (!aboutWindow) {
+    if (typeof aboutWindow === undefined) {
         aboutWindow = createWindow({
             title: "about",
             width: 200,
@@ -79,13 +78,7 @@ function createAboutWindow() {
 }
 
 async function createTray() {
-    const iconPath = path.join(
-        app.getAppPath(),
-        "app",
-        "electron",
-        "assets",
-        "tray_300x300.png"
-    );
+    const iconPath = path.join(app.getAppPath(), "app", "electron", "assets", "tray_300x300.png");
     const icon = nativeImage.createFromPath(iconPath);
     const tray = new Tray(icon);
     tray.setContextMenu(contextMenu);
@@ -102,4 +95,4 @@ app.whenReady().then(() => {
 
 app.on("window-all-closed", () => {});
 
-require("./utils/clipboard");
+import "./utils/clipboard";

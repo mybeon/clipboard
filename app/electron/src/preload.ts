@@ -1,9 +1,9 @@
-const { contextBridge, ipcRenderer } = require("electron");
+import { contextBridge, ipcRenderer } from "electron";
 
 contextBridge.exposeInMainWorld("electronAPI", {
     getClipboard: () => ipcRenderer.invoke("clipboard:get"),
-    writeToClipboard: text => ipcRenderer.send("clipboard:write", text),
+    writeToClipboard: (text: string) => ipcRenderer.send("clipboard:write", text),
     clearClipboard: () => ipcRenderer.send("clipboard:clear"),
-    openUrl: url => ipcRenderer.send("open-url", url),
+    openUrl: (url: string) => ipcRenderer.send("open-url", url),
     version: () => ipcRenderer.invoke("version"),
 });

@@ -1,7 +1,21 @@
-const { app, BrowserWindow } = require("electron");
-const path = require("path");
+import { app, BrowserWindow } from "electron";
+import path from "path";
 
-module.exports = function ({ title, width, height, frame = true, resizable = false }) {
+type Args = {
+    title: string;
+    width: number;
+    height: number;
+    frame?: boolean;
+    resizable?: boolean;
+};
+
+export default function ({
+    title,
+    width,
+    height,
+    frame = true,
+    resizable = false,
+}: Args): BrowserWindow {
     const window = new BrowserWindow({
         title: title + "Window",
         width,
@@ -10,7 +24,7 @@ module.exports = function ({ title, width, height, frame = true, resizable = fal
         resizable,
         webPreferences: {
             sandbox: true,
-            preload: path.join(app.getAppPath(), "app", "electron", "preload.js"),
+            preload: path.join(app.getAppPath(), "app", "electron", "build", "preload.js"),
         },
         show: false,
     });
@@ -27,8 +41,8 @@ module.exports = function ({ title, width, height, frame = true, resizable = fal
     if (isDev) {
         window.loadURL(`http://localhost:3000/${title}.html`);
     } else {
-        window.loadFile(path.join(app.getAppPath(), "app", "build", `${title}.html`));
+        window.loadFile(path.join(app.getAppPath(), "app", "renderer", "build", `${title}.html`));
     }
 
     return window;
-};
+}

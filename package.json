@@ -5,16 +5,18 @@
     "main": "app/electron/build/app.js",
     "private": true,
     "scripts": {
+        "tsc": "tsc -w",
         "vite:dev": "vite",
         "vite:build": "vite build",
-        "dev": "npm run vite:dev & NODE_ENV=development electronmon .",
-        "dist:test": "npm run vite:build && NODE_ENV=test electron .",
-        "dist": "npm run vite:build && electron-builder --linux"
+        "dev": "tsc -w & npm run vite:dev & NODE_ENV=development electronmon .",
+        "dist:test": "tsc && npm run vite:build && NODE_ENV=test electron .",
+        "dist": "tsc && npm run vite:build && electron-builder --linux"
     },
     "electronmon": {
         "patterns": [
-            "!app/src",
-            "!app/build"
+            "!app/renderer/src",
+            "!app/renderer/build",
+            "!app/electron/src"
         ]
     },
     "build": {
@@ -50,6 +52,7 @@
         "sanitize-html": "^2.11.0"
     },
     "devDependencies": {
+        "@types/sanitize-html": "^2.9.1",
         "electron": "^26.2.3",
         "electron-builder": "^24.6.4",
         "electronmon": "^2.0.2",
