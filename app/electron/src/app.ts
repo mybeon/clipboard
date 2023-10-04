@@ -14,7 +14,10 @@ const isDev = process.env.NODE_ENV === "development" || process.env.NODE_ENV ===
 const mainMenu = Menu.buildFromTemplate([
     {
         label: "File",
-        submenu: [{ label: "Quit", click: () => app.quit(), accelerator: "CMDorCTRL+w" }],
+        submenu: [
+            { label: "Close window", click: () => mainWindow?.close(), accelerator: "CMDorCTRL+w" },
+            { label: "Quit", click: () => app.quit(), accelerator: "CMDorCTRL+q" },
+        ],
     },
     {
         label: "Help",
