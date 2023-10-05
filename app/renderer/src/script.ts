@@ -6,9 +6,10 @@ type ClipboardElement = {
     date: number;
 };
 
-type ElectronAPI = {
+export type ElectronAPI = {
     clearClipboard: () => void;
     getClipboard: () => Promise<ClipboardElement[]>;
+    writeToClipboard: (text: string) => void;
 };
 
 declare const electronAPI: ElectronAPI;

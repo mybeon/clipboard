@@ -1,7 +1,10 @@
 import truncate from "../utils/truncate";
 import formatDate from "../utils/formatDate";
 import { list } from "../script";
+import type { ElectronAPI } from "../script";
 const notification = <HTMLElement>document.querySelector(".notification");
+
+declare const electronAPI: ElectronAPI;
 
 export default class {
     text: string;
@@ -37,6 +40,7 @@ export default class {
 
     onClick() {
         notification.classList.add("active");
+        electronAPI.writeToClipboard(this.text);
         setTimeout(() => {
             notification.classList.remove("active");
         }, 1800);
