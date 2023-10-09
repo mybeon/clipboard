@@ -1,6 +1,6 @@
 {
     "name": "clipboard",
-    "version": "1.1.1",
+    "version": "0.0.8",
     "description": "This app is a straightforward and user-friendly clipboard management app designed to help you never lose track of your clipboard history. You can easily access previously copied text, making your copy-paste tasks more efficient than ever.",
     "main": "app/electron/build/app.js",
     "private": true,
@@ -10,7 +10,7 @@
         "vite:build": "vite build",
         "dev": "tsc -w & npm run vite:dev & NODE_ENV=development electronmon .",
         "dist:test": "tsc && npm run vite:build && NODE_ENV=test electron .",
-        "dist": "tsc && npm run vite:build && electron-builder --linux"
+        "dist": "tsc && npm run vite:build && electron-builder --linux --publish never"
     },
     "electronmon": {
         "patterns": [
