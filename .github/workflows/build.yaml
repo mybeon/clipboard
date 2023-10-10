@@ -21,6 +21,14 @@ jobs:
       - name: Installing dependencies
         if: ${{ !steps.node-modules-cache.outputs.cache-hit }}
         run: npm ci
+      - name: Caching build folder
+        uses: actions/cache@v3
+        id: build-folder-cache
+        with:
+          path: |
+            dist/linux-unpacked
+            dist/builder-effective-config.yaml
+          key: build-${{ hashFiles('dist/builder-effective-config.yaml') }}
       - name: Building for linux
         run: npm run dist
       - name: Creating new release
