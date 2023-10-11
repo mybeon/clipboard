@@ -9,7 +9,7 @@ type ClipboardElement = {
 let content: ClipboardElement[] = [];
 
 setInterval(() => {
-    const text = clipboard.readText();
+    const text = clipboard.readText().trim();
 
     const sanitizeInput = sanitizeHtml(text, {
         allowedTags: [],

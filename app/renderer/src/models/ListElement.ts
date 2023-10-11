@@ -2,7 +2,8 @@ import truncate from "../utils/truncate";
 import formatDate from "../utils/formatDate";
 import { list } from "../script";
 import type { ElectronAPI } from "../script";
-const notification = <HTMLElement>document.querySelector(".notification");
+const notification = <HTMLSpanElement>document.querySelector(".notification");
+const tooltip = <HTMLSpanElement>document.querySelector(".tooltip");
 
 declare const electronAPI: ElectronAPI;
 
@@ -11,6 +12,7 @@ export default class {
     date: number;
     id: number;
     insertedEl: HTMLLIElement;
+    timeout: NodeJS.Timeout;
 
     constructor(text: string, date: number) {
         this.text = text;
@@ -18,7 +20,8 @@ export default class {
         this.id = Math.ceil(Math.random() * 100 * 100);
         this.init();
         this.insertedEl = <HTMLLIElement>document.getElementById(this.id.toString());
-        this.listener();
+        this.listeners();
+        this.timeout;
     }
 
     init() {
@@ -27,15 +30,24 @@ export default class {
             <img src="./icons/doc.svg" />
             <div class="content">
                 <p>${truncate(this.text)}</p>
-                <span>${formatDate(this.date)}</span>
+                <div class="info">
+                    <span>${formatDate(this.date)}</span>
+                    ${this.text.length > 34 ? '<img src="./icons/tooltip.svg" />' : ""}
+                <div/>
             </div>
         </li>
         `;
         list.insertAdjacentHTML("afterbegin", element);
     }
 
-    listener() {
+    listeners() {
         this.insertedEl.addEventListener("click", this.onClick.bind(this));
+        this.insertedEl
+            .querySelector(".info img")
+            ?.addEventListener("mouseenter", this.onHover.bind(this));
+        this.insertedEl
+            .querySelector(".info img")
+            ?.addEventListener("mouseleave", this.onLeave.bind(this));
     }
 
     onClick() {
@@ -44,5 +56,20 @@ export default class {
         setTimeout(() => {
             notification.classList.remove("active");
         }, 1800);
+    }
+
+    onHover(e: MouseEvent) {
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+            tooltip.style.display = "inline";
+            tooltip.style.top = e.y + 10 + "px";
+            tooltip.style.left = e.x + "px";
+            tooltip.innerHTML = this.text;
+        }, 800);
+    }
+
+    onLeave() {
+        clearTimeout(this.timeout);
+        tooltip.style.display = "none";
     }
 }

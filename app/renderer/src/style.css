@@ -153,10 +153,29 @@ li span {
     font-family: "Ubuntu";
     font-size: 12px;
     color: var(--second-text-color);
+    display: flex;
 }
 
 .content {
     width: calc(100% - 42px);
+}
+
+.info {
+    margin-top: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info img {
+    margin-left: auto;
+    width: 14px;
+    opacity: 0.2;
+    transition: opacity 200ms ease-in-out;
+}
+
+.info img:hover {
+    opacity: 1;
 }
 
 .notification {
@@ -175,6 +194,21 @@ li span {
 
 .notification.active {
     transform: translate(-50%, 0px);
+}
+
+.tooltip {
+    position: absolute;
+    padding: 2.5px 5px;
+    max-width: 40ch;
+    min-width: 34ch;
+    max-height: 300px;
+    border-radius: 5px;
+    transform: translateX(-100%);
+    background-color: var(--text-color);
+    color: white;
+    font-size: 12px;
+    word-wrap: break-word;
+    /* white-space: pre-wrap; */
 }
 
 .about {
