@@ -27,7 +27,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     content.forEach(el => {
         new ListElement(el.text, el.date);
     });
-    prevText = content[content.length - 1].text;
+    prevText = content[content.length - 1]?.text;
 });
 
 setInterval(async () => {
