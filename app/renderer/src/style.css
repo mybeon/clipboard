@@ -155,6 +155,10 @@ li span {
     color: var(--second-text-color);
 }
 
+.content {
+    width: calc(100% - 42px);
+}
+
 .notification {
     position: absolute;
     bottom: 10px;
