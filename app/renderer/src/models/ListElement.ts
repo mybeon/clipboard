@@ -2,6 +2,7 @@ import truncate from "../utils/truncate";
 import formatDate from "../utils/formatDate";
 import { list } from "../script";
 import type { ElectronAPI } from "../script";
+import setTooltipStyle from "../utils/setTooltipStyle";
 const notification = <HTMLSpanElement>document.querySelector(".notification");
 const tooltip = <HTMLSpanElement>document.querySelector(".tooltip");
 
@@ -61,9 +62,7 @@ export default class {
     onHover(e: MouseEvent) {
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
-            tooltip.style.display = "inline";
-            tooltip.style.top = e.y + 10 + "px";
-            tooltip.style.left = e.x + "px";
+            setTooltipStyle(e, tooltip);
             tooltip.innerHTML = this.text;
         }, 800);
     }
