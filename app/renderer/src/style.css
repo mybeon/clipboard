@@ -24,6 +24,7 @@
     4. Improve text rendering
   */
 body {
+    user-select: none;
     line-height: 1.5;
     -webkit-font-smoothing: antialiased;
     font-family: "Ubuntu";
