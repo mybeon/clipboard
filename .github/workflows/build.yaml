@@ -16,7 +16,7 @@ jobs:
         id: cache-key
         run: |
           jq 'del(.["version"], .["packages"][""]["version"])' package-lock.json > packages-only.json
-          echo hash=$(echo -n "$(cat packages-only.json.json)" | md5sum | mawk '{print $1}') >> $GITHUB_OUTPUT
+          echo hash=$(echo -n "$(cat packages-only.json)" | md5sum | mawk '{print $1}') >> $GITHUB_OUTPUT
       - name: Caching dependencies
         uses: actions/cache@v3
         id: node-modules-cache

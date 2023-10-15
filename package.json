@@ -6,6 +6,8 @@
     "private": true,
     "scripts": {
         "tsc": "tsc -w",
+        "test": "npm run vite:build && tsc && NODE_ENV=test playwright test",
+        "test:debug": "DEBUG=pw:browser* npm run test",
         "vite:dev": "vite",
         "vite:build": "vite build",
         "dev": "tsc -w & npm run vite:dev & NODE_ENV=development electronmon .",
@@ -53,10 +55,12 @@
         "sanitize-html": "^2.11.0"
     },
     "devDependencies": {
+        "@playwright/test": "^1.39.0",
         "@types/sanitize-html": "^2.9.1",
         "electron": "^26.4.0",
         "electron-builder": "^24.6.4",
         "electronmon": "^2.0.2",
+        "playwright": "^1.39.0",
         "terser": "^5.20.0",
         "typescript": "^5.2.2",
         "vite": "^4.4.9"

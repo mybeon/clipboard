@@ -1,4 +1,5 @@
-import { app, Menu, nativeImage, Tray, Notification, BrowserWindow } from "electron";
+import { app, Menu, nativeImage, Tray, Notification } from "electron";
+import type { BrowserWindow } from "electron";
 import path from "path";
 import createWindow from "./utils/createWindow";
 
@@ -9,7 +10,7 @@ app.commandLine.appendSwitch("disable-gpu-compositing");
 let mainWindow: BrowserWindow | undefined;
 let aboutWindow: BrowserWindow | undefined;
 
-const isDev = process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test";
+const isDev = process.env.NODE_ENV === "development";
 
 const mainMenu = Menu.buildFromTemplate([
     {
@@ -88,6 +89,11 @@ async function createTray() {
 }
 
 app.whenReady().then(() => {
+    if (process.env.NODE_ENV === "test") {
+        createMainWindow();
+        return;
+    }
+
     createTray();
 
     new Notification({

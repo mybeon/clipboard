@@ -2,5 +2,6 @@
     "[yaml]": {
         "editor.tabSize": 2,
         "editor.formatOnSave": false
-    }
+    },
+    "cSpell.words": ["clipboardy"]
 }

@@ -4,3 +4,4 @@ docs
 app/**/build
 .secrets
 /bin
+/__tests__/test-results
