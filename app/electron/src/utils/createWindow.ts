@@ -24,7 +24,7 @@ export default function ({
         resizable,
         webPreferences: {
             sandbox: true,
-            preload: path.join(app.getAppPath(), "app", "electron", "build", "preload.js"),
+            preload: path.resolve("app", "electron", "build", "preload.js"),
         },
         show: false,
     });
@@ -41,7 +41,7 @@ export default function ({
     if (isDev) {
         window.loadURL(`http://localhost:3000/${title}.html`);
     } else {
-        window.loadFile(path.join(app.getAppPath(), "app", "renderer", "build", `${title}.html`));
+        window.loadFile(path.resolve("app", "renderer", "build", `${title}.html`));
     }
 
     return window;
