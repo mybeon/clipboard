@@ -15,7 +15,7 @@ const Header = () => {
     return (
         <header>
             <h1>Clipboard</h1>
-            <button onClick={onclickHandler} className="btn">
+            <button id="clear" onClick={onclickHandler} className="btn">
                 clear
             </button>
         </header>
