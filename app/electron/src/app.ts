@@ -1,5 +1,5 @@
-import { app, Menu, nativeImage, Tray, Notification } from "electron";
 import type { BrowserWindow } from "electron";
+import { Menu, Notification, Tray, app, nativeImage } from "electron";
 import path from "path";
 import createWindow from "./utils/createWindow";
 
@@ -49,7 +49,7 @@ function createMainWindow() {
 
         // creating the window
         mainWindow = createWindow({
-            title: "home",
+            title: "index",
             width: isDev ? 600 : 350,
             height: 600,
         });
