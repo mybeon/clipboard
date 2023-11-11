@@ -10,7 +10,6 @@ function app() {
             <Header />
             <List />
             <Popup />
-            <span className="tooltip"></span>
         </GlobalContextProvider>
     );
 }

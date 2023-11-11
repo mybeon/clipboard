@@ -14,11 +14,14 @@ const List = () => {
     useEffect(() => {
         const interval = setInterval(async () => {
             const content = await electronAPI.getClipboard();
-            dispatch({ type: REDUCER_ACTION_TYPE.UPDATE_DATA, value: content.reverse() });
+
+            if (content.length !== data?.length) {
+                dispatch({ type: REDUCER_ACTION_TYPE.UPDATE_DATA, value: content.reverse() });
+            }
         }, 1000);
 
         return () => clearInterval(interval);
-    }, []);
+    }, [data]);
 
     if (data === undefined) {
         return <p>loading...</p>;

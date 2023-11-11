@@ -4,6 +4,7 @@ import { GlobalContext, REDUCER_ACTION_TYPE } from "../context/global";
 import type { ElectronAPI } from "../types";
 import formatDate from "../utils/formatDate";
 import truncate from "../utils/truncate";
+import Tooltip from "./Tooltip";
 
 type Props = {
     children?: React.ReactNode;
@@ -26,7 +27,7 @@ const ListElement = ({ element }: Props) => {
                 <p>{truncate(element.text)}</p>
                 <div className="info">
                     <span>{formatDate(element.date)}</span>
-                    {element.text.length > 34 ? <img src="./icons/tooltip.svg" /> : ""}
+                    {element.text.length > 34 && <Tooltip content={element.text} />}
                 </div>
             </div>
         </li>
