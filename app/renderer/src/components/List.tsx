@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { GlobalContext, REDUCER_ACTION_TYPE } from "../context/global";
 import type { ElectronAPI } from "../types";
 import ListElement from "./ListElement";
+import Spinner from "./Spinner";
 
 declare const electronAPI: ElectronAPI;
 
@@ -24,7 +25,7 @@ const List = () => {
     }, [data]);
 
     if (data === undefined) {
-        return <p>loading...</p>;
+        return <Spinner />;
     }
 
     if (data.length === 0) {
