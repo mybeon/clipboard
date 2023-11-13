@@ -288,6 +288,7 @@ p.empty {
     background-color: var(--background-color);
     border-radius: 3px;
     box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.13);
+    height: 100%;
 }
 
 .tab-wrapper .upper-section {
@@ -298,6 +299,7 @@ p.empty {
 .tab-wrapper .upper-section .tab-title {
     display: flex;
     flex: 1;
+    color: var(--text-color);
     cursor: pointer;
     justify-content: center;
     text-transform: capitalize;
@@ -307,11 +309,21 @@ p.empty {
 
 .tab-wrapper .upper-section .tab-title .is-active {
     position: absolute;
-    width: 50%;
     height: 2px;
     border-radius: 20px;
     bottom: 0px;
     background-color: var(--text-color);
+    animation: bar 500ms ease-in-out forwards;
+}
+
+@keyframes bar {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 50%;
+    }
 }
 
 .input {

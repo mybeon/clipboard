@@ -34,7 +34,6 @@ const Header = () => {
     return (
         <header>
             <div className="user" onClick={openModal}>
-                {/* <img src="/icons/user.svg" height={30} /> */}
                 <HiUserCircle size={30} color="#303030" />
                 <span>Login</span>
             </div>

@@ -14,7 +14,12 @@ const Tab = (props: Props) => {
     }
 
     return (
-        <div key={props.index} className="tab-title" onClick={setActiveTab}>
+        <div
+            key={props.index}
+            className="tab-title"
+            style={{ opacity: props.isActive ? 1 : 0.5 }}
+            onClick={setActiveTab}
+        >
             {props.title}
             {props.isActive && <div className="is-active"></div>}
         </div>

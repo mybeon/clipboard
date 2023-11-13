@@ -23,7 +23,6 @@ const ListElement = ({ element }: Props) => {
 
     return (
         <li data-content={element.text} onClick={onClickHandler}>
-            {/* <img src="./icons/doc.svg" /> */}
             <HiOutlineDocumentText size={52} color="#aaaaaa" />
             <div className="content">
                 <p>{truncate(element.text)}</p>

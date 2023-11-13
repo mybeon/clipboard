@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import Tab from "./Tab";
 
@@ -32,7 +33,14 @@ const Tabs = (props: Props) => {
                     />
                 ))}
             </div>
-            {activeTab.element}
+            <motion.div
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                key={activeTab.id}
+            >
+                {activeTab.element}
+            </motion.div>
         </div>
     );
 };
