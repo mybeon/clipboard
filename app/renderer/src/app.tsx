@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./components/Header";
 import List from "./components/List";
-import Popup from "./components/Popup";
+import Popup from "./components/UI/Popup";
 import { GlobalContextProvider } from "./context/global";
 
 function app() {

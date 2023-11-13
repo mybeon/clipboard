@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { GlobalContext, REDUCER_ACTION_TYPE } from "../context/global";
 import type { ElectronAPI } from "../types";
 import ListElement from "./ListElement";
-import Spinner from "./Spinner";
+import Spinner from "./UI/Spinner";
 
 declare const electronAPI: ElectronAPI;
 

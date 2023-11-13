@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { createPortal } from "react-dom";
-import { GlobalContext, REDUCER_ACTION_TYPE } from "../context/global";
+import { GlobalContext, REDUCER_ACTION_TYPE } from "../../context/global";
 
 const element = document.querySelector("#root")!;
 
