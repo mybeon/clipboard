@@ -115,7 +115,7 @@ header .user {
     cursor: pointer;
 }
 
-header .user img {
+header .user svg {
     margin-right: 8px;
 }
 
@@ -156,7 +156,7 @@ li:hover {
     background-color: var(--background-color);
 }
 
-li img {
+li svg {
     width: 24px;
     margin-right: 18px;
 }
@@ -184,14 +184,14 @@ li span {
     justify-content: space-between;
 }
 
-.info img {
+.info svg {
     margin-left: auto;
     width: 14px;
     opacity: 0.2;
     transition: opacity 200ms ease-in-out;
 }
 
-.info img:hover {
+.info svg:hover {
     opacity: 1;
 }
 

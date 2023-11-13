@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { HiOutlineDocumentText } from "react-icons/hi";
 import type { ClipboardElement } from "../../../types";
 import { GlobalContext, REDUCER_ACTION_TYPE } from "../context/global";
 import type { ElectronAPI } from "../types";
@@ -22,7 +23,8 @@ const ListElement = ({ element }: Props) => {
 
     return (
         <li data-content={element.text} onClick={onClickHandler}>
-            <img src="./icons/doc.svg" />
+            {/* <img src="./icons/doc.svg" /> */}
+            <HiOutlineDocumentText size={52} color="#aaaaaa" />
             <div className="content">
                 <p>{truncate(element.text)}</p>
                 <div className="info">

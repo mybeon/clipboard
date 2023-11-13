@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { HiInformationCircle } from "react-icons/hi";
 
 type Props = {
     children?: React.ReactNode;
@@ -10,7 +11,7 @@ const Tooltip = ({ content }: Props) => {
 
     let timeout: NodeJS.Timeout;
 
-    function mouseEnterHandler(e: React.MouseEvent<HTMLDivElement, MouseEvent>) {
+    function mouseEnterHandler(e: React.MouseEvent<SVGAElement, MouseEvent>) {
         clearTimeout(timeout);
 
         timeout = setTimeout(() => {
@@ -23,7 +24,7 @@ const Tooltip = ({ content }: Props) => {
         setStyle({ display: "none" });
     }
 
-    function setTooltipStyle(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
+    function setTooltipStyle(event: React.MouseEvent<SVGAElement, MouseEvent>): void {
         const isTop = window.outerHeight - event.clientY > window.outerHeight / 2;
 
         const style: React.CSSProperties = {
@@ -43,8 +44,8 @@ const Tooltip = ({ content }: Props) => {
 
     return (
         <div style={{ display: "inline" }}>
-            <img
-                src="./icons/tooltip.svg"
+            <HiInformationCircle
+                color="#303030"
                 onMouseEnter={mouseEnterHandler}
                 onMouseLeave={mouseLeaveHandler}
             />

@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { HiUserCircle } from "react-icons/hi";
 import { GlobalContext, REDUCER_ACTION_TYPE } from "../context/global";
 import type { ElectronAPI } from "../types";
 import Login from "./Auth/Login";
@@ -33,7 +34,8 @@ const Header = () => {
     return (
         <header>
             <div className="user" onClick={openModal}>
-                <img src="/icons/user.svg" height={30} />
+                {/* <img src="/icons/user.svg" height={30} /> */}
+                <HiUserCircle size={30} color="#303030" />
                 <span>Login</span>
             </div>
             <Modal isVisible={isModalVisible} onModalClose={closeModal}>
