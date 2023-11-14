@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from "react";
-import { GlobalContext, REDUCER_ACTION_TYPE } from "../context/global";
-import type { ElectronAPI } from "../types";
-import ListElement from "./ListElement";
-import Spinner from "./UI/Spinner";
+import { GlobalContext, REDUCER_ACTION_TYPE } from "../../context/global";
+import type { ElectronAPI } from "../../types";
+import ListElement from "../ListElement";
+import Spinner from "../UI/Spinner";
 
 declare const electronAPI: ElectronAPI;
 
-const List = () => {
+const Local = () => {
     const {
         state: { data },
         dispatch,
@@ -41,4 +41,4 @@ const List = () => {
     );
 };
 
-export default List;
+export default Local;

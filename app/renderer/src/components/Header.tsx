@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import { HiUserCircle } from "react-icons/hi";
 import { GlobalContext, REDUCER_ACTION_TYPE } from "../context/global";
-import type { ElectronAPI } from "../types";
+import type { ElectronAPI, Tab } from "../types";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
 import Modal from "./UI/Modal";
@@ -9,7 +9,7 @@ import Tabs from "./UI/Tabs";
 
 declare const electronAPI: ElectronAPI;
 
-const tabsData = [
+const tabsData: Tab[] = [
     { id: 0, title: "login", element: <Login /> },
     { id: 1, title: "register", element: <Register /> },
 ];

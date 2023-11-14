@@ -81,6 +81,7 @@ ul {
     max-height: calc(100vh - 62px);
     overflow-y: auto;
     scrollbar-gutter: stable;
+    margin-top: 10px;
 }
 
 ul::-webkit-scrollbar {
@@ -150,6 +151,10 @@ li {
     border-bottom: 1px solid #aaaaaa65;
     cursor: pointer;
     transition: background-color 180ms ease-in-out;
+}
+
+li:last-child {
+    margin-bottom: 38px;
 }
 
 li:hover {

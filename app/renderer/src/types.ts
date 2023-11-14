@@ -6,4 +6,10 @@ export type ElectronAPI = {
     writeToClipboard: (text: string) => void;
 };
 
+export type Tab = {
+    id: number;
+    title: string;
+    element: React.JSX.Element;
+};
+
 export declare const electronAPI: ElectronAPI;

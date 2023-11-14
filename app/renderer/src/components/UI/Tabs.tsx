@@ -1,16 +1,11 @@
 import { motion } from "framer-motion";
 import React, { useState } from "react";
+import type { Tab as TabType } from "../../types";
 import Tab from "./Tab";
-
-type Tab = {
-    id: number;
-    title: string;
-    element: React.JSX.Element;
-};
 
 type Props = {
     children?: React.ReactNode;
-    data: Tab[];
+    data: TabType[];
 };
 
 const Tabs = (props: Props) => {
