@@ -1,4 +1,6 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { HiOutlinePencilAlt, HiOutlineRefresh, HiOutlineTrash, HiOutlineX } from "react-icons/hi";
+import { ClipboardElement } from "../../../../types";
 import { GlobalContext, REDUCER_ACTION_TYPE } from "../../context/global";
 import type { ElectronAPI } from "../../types";
 import ListElement from "../ListElement";
@@ -6,11 +8,38 @@ import Spinner from "../UI/Spinner";
 
 declare const electronAPI: ElectronAPI;
 
+const iconStyle = {
+    size: 20,
+    color: "#303030",
+};
+
 const Local = () => {
     const {
         state: { data },
         dispatch,
     } = useContext(GlobalContext);
+
+    const [selectable, setSelectable] = useState<boolean>(false);
+    const [selectedItems, setSelectedItems] = useState<ClipboardElement[]>([]);
+
+    function onclickHandler() {
+        electronAPI.clearClipboard();
+        dispatch({ type: REDUCER_ACTION_TYPE.CLEAR_DATA });
+    }
+
+    function onSelectItemHandler(element: ClipboardElement): void {
+        const exists = selectedItems.some(sel => sel.id === element.id);
+        if (exists) {
+            setSelectedItems(selectedItems.filter(el => el.id !== element.id));
+        } else {
+            setSelectedItems(prev => [element, ...prev]);
+        }
+    }
+
+    function cancelSelection() {
+        setSelectable(false);
+        setSelectedItems([]);
+    }
 
     useEffect(() => {
         const interval = setInterval(async () => {
@@ -33,11 +62,40 @@ const Local = () => {
     }
 
     return (
-        <ul id="list">
-            {data.map(el => (
-                <ListElement key={el.id} element={el} />
-            ))}
-        </ul>
+        <React.Fragment>
+            <div className="tool-section">
+                <button id="clear" onClick={onclickHandler} className="btn">
+                    clear all
+                </button>
+                <div className="icons">
+                    {!selectable ? (
+                        <HiOutlinePencilAlt
+                            {...iconStyle}
+                            onClick={() => {
+                                setSelectable(prev => !prev);
+                            }}
+                        />
+                    ) : (
+                        <>
+                            <HiOutlineRefresh {...iconStyle} />
+                            <HiOutlineX {...iconStyle} onClick={cancelSelection} />
+                            <HiOutlineTrash {...iconStyle} />
+                        </>
+                    )}
+                </div>
+            </div>
+            <ul id="list">
+                {data.map(el => (
+                    <ListElement
+                        key={el.id}
+                        element={el}
+                        selectable={selectable}
+                        selectedItems={selectedItems}
+                        onSelectItem={onSelectItemHandler}
+                    />
+                ))}
+            </ul>
+        </React.Fragment>
     );
 };
 

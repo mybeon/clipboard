@@ -1,13 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { HiUserCircle } from "react-icons/hi";
-import { GlobalContext, REDUCER_ACTION_TYPE } from "../context/global";
-import type { ElectronAPI, Tab } from "../types";
+import type { Tab } from "../types";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
 import Modal from "./UI/Modal";
 import Tabs from "./UI/Tabs";
-
-declare const electronAPI: ElectronAPI;
 
 const tabsData: Tab[] = [
     { id: 0, title: "login", element: <Login /> },
@@ -15,13 +12,7 @@ const tabsData: Tab[] = [
 ];
 
 const Header = () => {
-    const { dispatch } = useContext(GlobalContext);
     const [isModalVisible, setIsModalVisible] = useState(false);
-
-    function onclickHandler() {
-        electronAPI.clearClipboard();
-        dispatch({ type: REDUCER_ACTION_TYPE.CLEAR_DATA });
-    }
 
     function openModal() {
         setIsModalVisible(true);
@@ -40,9 +31,6 @@ const Header = () => {
             <Modal isVisible={isModalVisible} onModalClose={closeModal}>
                 <Tabs data={tabsData} />
             </Modal>
-            <button id="clear" onClick={onclickHandler} className="btn">
-                clear
-            </button>
         </header>
     );
 };

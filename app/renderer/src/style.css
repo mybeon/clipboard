@@ -71,7 +71,7 @@ h6 {
 }
 
 :root {
-    --background-color: hsl(0, 0%, 97%);
+    --background-color: rgb(247, 247, 247);
     --text-color: #303030;
     --second-text-color: #aaaaaa;
 }
@@ -81,7 +81,6 @@ ul {
     max-height: calc(100vh - 62px);
     overflow-y: auto;
     scrollbar-gutter: stable;
-    margin-top: 10px;
 }
 
 ul::-webkit-scrollbar {
@@ -147,10 +146,19 @@ h1 {
 
 li {
     display: flex;
+    align-items: center;
     padding: 10px 18px;
     border-bottom: 1px solid #aaaaaa65;
     cursor: pointer;
     transition: background-color 180ms ease-in-out;
+}
+
+li .icon-wrapper {
+    margin-right: 16px;
+    width: 34px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 li:last-child {
@@ -159,11 +167,6 @@ li:last-child {
 
 li:hover {
     background-color: var(--background-color);
-}
-
-li svg {
-    width: 24px;
-    margin-right: 18px;
 }
 
 li p {
@@ -387,4 +390,38 @@ p.empty {
     align-items: center;
     justify-content: center;
     color: var(--text-color);
+}
+
+.tool-section {
+    margin-top: 10px;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tool-section .icons {
+    display: flex;
+    align-items: center;
+}
+
+.tool-section .icons svg {
+    margin-inline: 5px;
+    cursor: pointer;
+    transition: opacity 300ms ease-in-out;
+}
+
+.tool-section .icons svg:hover {
+    opacity: 0.5;
+}
+
+.checkbox {
+    height: 18px;
+    width: 18px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--text-color);
+    transition: background-color 100ms ease-in-out;
 }
