@@ -1,8 +1,10 @@
+import { arrayUnion, doc, setDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { HiOutlinePencilAlt, HiOutlineRefresh, HiOutlineTrash, HiOutlineX } from "react-icons/hi";
 import { ClipboardElement } from "../../../../types";
 import { AuthContext } from "../../context/auth";
 import { GlobalContext, REDUCER_ACTION_TYPE } from "../../context/global";
+import { db } from "../../firebase";
 import type { ElectronAPI } from "../../types";
 import ListElement from "../ListElement";
 import Button from "../UI/Button";
@@ -45,6 +47,14 @@ const Local = () => {
     function cancelSelection() {
         setSelectable(false);
         setSelectedItems([]);
+    }
+
+    async function synchData() {
+        if (userId) {
+            const reference = doc(db, "clipboard", userId);
+            await setDoc(reference, { items: arrayUnion(...selectedItems) }, { merge: true });
+            dispatch({ type: REDUCER_ACTION_TYPE.SHOW_POPUP, value: "Synched successfully" });
+        }
     }
 
     useEffect(() => {
