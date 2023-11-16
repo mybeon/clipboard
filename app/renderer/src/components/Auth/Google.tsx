@@ -1,11 +1,7 @@
 import React from "react";
 import { FcGoogle } from "react-icons/fc";
 
-type Props = {
-    children?: React.ReactNode;
-};
-
-const Google = (props: Props) => {
+const Google = () => {
     return (
         <React.Fragment>
             <div className="divider"></div>

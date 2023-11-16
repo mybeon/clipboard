@@ -14,7 +14,7 @@ const PopupComponent = () => {
         if (popup.isPopupVisible) {
             const timeout = setTimeout(() => {
                 dispatch({ type: REDUCER_ACTION_TYPE.HIDE_POPUP });
-            }, 1500);
+            }, 2000);
 
             return () => clearTimeout(timeout);
         }
