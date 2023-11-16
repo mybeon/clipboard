@@ -1,9 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { HiOutlinePencilAlt, HiOutlineRefresh, HiOutlineTrash, HiOutlineX } from "react-icons/hi";
 import { ClipboardElement } from "../../../../types";
+import { AuthContext } from "../../context/auth";
 import { GlobalContext, REDUCER_ACTION_TYPE } from "../../context/global";
 import type { ElectronAPI } from "../../types";
 import ListElement from "../ListElement";
+import Button from "../UI/Button";
 import Spinner from "../UI/Spinner";
 
 declare const electronAPI: ElectronAPI;
@@ -18,6 +20,10 @@ const Local = () => {
         state: { data },
         dispatch,
     } = useContext(GlobalContext);
+
+    const {
+        state: { userId },
+    } = useContext(AuthContext);
 
     const [selectable, setSelectable] = useState<boolean>(false);
     const [selectedItems, setSelectedItems] = useState<ClipboardElement[]>([]);
@@ -64,9 +70,9 @@ const Local = () => {
     return (
         <React.Fragment>
             <div className="tool-section">
-                <button id="clear" onClick={onclickHandler} className="btn">
+                <Button id="clear" onClick={onclickHandler}>
                     clear all
-                </button>
+                </Button>
                 <div className="icons">
                     {!selectable ? (
                         <HiOutlinePencilAlt
@@ -77,7 +83,7 @@ const Local = () => {
                         />
                     ) : (
                         <>
-                            <HiOutlineRefresh {...iconStyle} />
+                            <HiOutlineRefresh {...iconStyle} onClick={synchData} />
                             <HiOutlineX {...iconStyle} onClick={cancelSelection} />
                             <HiOutlineTrash {...iconStyle} />
                         </>
