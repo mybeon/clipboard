@@ -15,11 +15,18 @@ const Shared = () => {
     const [data, setData] = useState<ClipboardElement[] | undefined>(undefined);
 
     useEffect(() => {
+        if (!userId) return;
         const reference = doc(db, "clipboard", userId);
-        const unsubscribe = onSnapshot(reference, doc => {
-            const { items } = doc.data() as { items: ClipboardElement[] };
-            setData(items);
-        });
+        const unsubscribe = onSnapshot(
+            reference,
+            doc => {
+                const { items } = doc.data() as { items: ClipboardElement[] };
+                setData(items.reverse());
+            },
+            err => {
+                console.log(err); // eslint-disable-line
+            }
+        );
 
         return () => unsubscribe();
     }, []);
@@ -27,6 +34,14 @@ const Shared = () => {
     async function onclickHandler() {
         const reference = doc(db, "clipboard", userId);
         await setDoc(reference, { items: [] });
+    }
+
+    if (!navigator.onLine) {
+        return <p className="empty">Network error !</p>;
+    }
+
+    if (!userId) {
+        return <p className="empty">You have to be logged in first.</p>;
     }
 
     if (data === undefined) {
