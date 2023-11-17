@@ -4,7 +4,6 @@ import { GlobalContext, REDUCER_ACTION_TYPE } from "../../context/global";
 import { auth } from "../../firebase";
 import Button from "../UI/Button";
 import Input from "../UI/Input";
-import Google from "./Google";
 
 type Props = {
     children?: React.ReactNode;
@@ -45,7 +44,7 @@ const Login = (props: Props) => {
                     login
                 </Button>
             </form>
-            <Google />
+            {/* <Google /> */}
         </React.Fragment>
     );
 };

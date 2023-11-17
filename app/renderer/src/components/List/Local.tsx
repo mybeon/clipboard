@@ -1,6 +1,6 @@
 import { arrayUnion, doc, setDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
-import { HiOutlinePencilAlt, HiOutlineRefresh, HiOutlineTrash, HiOutlineX } from "react-icons/hi";
+import { HiOutlinePencilAlt, HiOutlineRefresh, HiOutlineX } from "react-icons/hi";
 import { ClipboardElement } from "../../../../types";
 import { AuthContext } from "../../context/auth";
 import { GlobalContext, REDUCER_ACTION_TYPE } from "../../context/global";
@@ -95,7 +95,7 @@ const Local = () => {
                         <>
                             <HiOutlineRefresh {...iconStyle} onClick={synchData} />
                             <HiOutlineX {...iconStyle} onClick={cancelSelection} />
-                            <HiOutlineTrash {...iconStyle} />
+                            {/* <HiOutlineTrash {...iconStyle} /> */}
                         </>
                     )}
                 </div>

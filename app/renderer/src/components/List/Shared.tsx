@@ -7,7 +7,7 @@ import ListElement from "../ListElement";
 import Button from "../UI/Button";
 import Spinner from "../UI/Spinner";
 
-const Local = () => {
+const Shared = () => {
     const {
         state: { userId },
     } = useContext(AuthContext);
@@ -53,4 +53,4 @@ const Local = () => {
     );
 };
 
-export default Local;
+export default Shared;
