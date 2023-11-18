@@ -1,6 +1,6 @@
 import { app, clipboard, ipcMain, shell } from "electron";
 import sanitizeHtml from "sanitize-html";
-import type { ClipboardElement } from "../../../types";
+import type { ClipboardElement } from "../types";
 
 let content: ClipboardElement[] = [];
 

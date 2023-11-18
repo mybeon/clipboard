@@ -1,5 +1,5 @@
 import React, { createContext, useReducer } from "react";
-import type { ClipboardElement } from "../../../types";
+import type { ClipboardElement } from "../../../electron/src/types";
 
 const initialState: {
     popup: { isPopupVisible: boolean; message: string };

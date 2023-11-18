@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { HiCheck, HiOutlineDocumentText } from "react-icons/hi";
-import type { ClipboardElement } from "../../../types";
+import type { ClipboardElement } from "../../../electron/src/types";
 import { GlobalContext, REDUCER_ACTION_TYPE } from "../context/global";
 import type { ElectronAPI } from "../types";
 import formatDate from "../utils/formatDate";

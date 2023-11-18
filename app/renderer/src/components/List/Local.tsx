@@ -1,7 +1,7 @@
 import { arrayUnion, doc, setDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
 import { HiOutlinePencilAlt, HiOutlineRefresh, HiOutlineX } from "react-icons/hi";
-import { ClipboardElement } from "../../../../types";
+import type { ClipboardElement } from "../../../../electron/src/types";
 import { AuthContext } from "../../context/auth";
 import { GlobalContext, REDUCER_ACTION_TYPE } from "../../context/global";
 import { db } from "../../firebase";

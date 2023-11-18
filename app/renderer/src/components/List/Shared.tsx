@@ -1,6 +1,6 @@
 import { doc, onSnapshot, setDoc } from "firebase/firestore";
 import React, { useContext, useEffect, useState } from "react";
-import { ClipboardElement } from "../../../../types";
+import { ClipboardElement } from "../../../../electron/src/types";
 import { AuthContext } from "../../context/auth";
 import { db } from "../../firebase";
 import ListElement from "../ListElement";

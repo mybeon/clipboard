@@ -1,4 +1,4 @@
-import type { ClipboardElement } from "../../types";
+import type { ClipboardElement } from "../../electron/src/types";
 
 export type ElectronAPI = {
     clearClipboard: () => void;

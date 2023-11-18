@@ -49,7 +49,7 @@ function createMainWindow() {
 
         // creating the window
         mainWindow = createWindow({
-            title: "index",
+            title: "home",
             width: isDev ? 600 : 350,
             height: 600,
         });
