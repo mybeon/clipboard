@@ -451,3 +451,16 @@ p.empty {
 .actions button {
     margin-left: 15px;
 }
+
+.synching {
+    animation: synch 1500ms linear infinite forwards;
+}
+
+@keyframes synch {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

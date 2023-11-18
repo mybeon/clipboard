@@ -31,6 +31,7 @@ const Local = () => {
     const [selectable, setSelectable] = useState<boolean>(false);
     const [selectedItems, setSelectedItems] = useState<ClipboardElement[]>([]);
     const [isPromptVisible, setIsPromptVisible] = useState<boolean>(false);
+    const [isSynching, setIsSynching] = useState<boolean>(false);
 
     function onSelectItemHandler(element: ClipboardElement): void {
         const exists = selectedItems.some(sel => sel.id === element.id);
@@ -47,10 +48,20 @@ const Local = () => {
     }
 
     async function synchData() {
-        if (userId) {
+        try {
+            if (isSynching) return;
+            if (!userId) throw new Error();
+
+            setIsSynching(true);
+
             const reference = doc(db, "clipboard", userId);
             await setDoc(reference, { items: arrayUnion(...selectedItems) }, { merge: true });
+
+            setIsSynching(false);
             dispatch({ type: REDUCER_ACTION_TYPE.SHOW_POPUP, value: "Synched successfully" });
+        } catch (e) {
+            setIsSynching(false);
+            dispatch({ type: REDUCER_ACTION_TYPE.SHOW_POPUP, value: "Synch error !" });
         }
     }
 
@@ -105,7 +116,11 @@ const Local = () => {
                         />
                     ) : (
                         <>
-                            <HiOutlineRefresh {...iconStyle} onClick={synchData} />
+                            <HiOutlineRefresh
+                                className={isSynching ? "synching" : ""}
+                                {...iconStyle}
+                                onClick={synchData}
+                            />
                             <HiOutlineX {...iconStyle} onClick={cancelSelection} />
                             {/* <HiOutlineTrash {...iconStyle} /> */}
                         </>
