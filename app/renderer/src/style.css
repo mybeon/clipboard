@@ -177,7 +177,7 @@ li .icon-wrapper {
 }
 
 li:last-child {
-    margin-bottom: 38px;
+    margin-bottom: calc(38px + 48px);
 }
 
 li:hover {
