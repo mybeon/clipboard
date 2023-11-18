@@ -6,6 +6,7 @@ type Props = {
     children?: React.ReactNode;
     isVisible: boolean;
     onModalClose: () => void;
+    wrapperStyle?: React.CSSProperties;
 };
 
 const Modal = (props: Props) => {
@@ -22,6 +23,7 @@ const Modal = (props: Props) => {
                     <div className="back-drop" onClick={props.onModalClose}></div>
                     <motion.div
                         className="wrapper"
+                        style={props.wrapperStyle}
                         initial={{ y: 10 }}
                         animate={{ y: 0 }}
                         exit={{ y: 10 }}

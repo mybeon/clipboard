@@ -8,6 +8,7 @@ import { db } from "../../firebase";
 import type { ElectronAPI } from "../../types";
 import ListElement from "../ListElement";
 import Button from "../UI/Button";
+import Prompt from "../UI/Prompt";
 import Spinner from "../UI/Spinner";
 
 declare const electronAPI: ElectronAPI;
@@ -29,11 +30,7 @@ const Local = () => {
 
     const [selectable, setSelectable] = useState<boolean>(false);
     const [selectedItems, setSelectedItems] = useState<ClipboardElement[]>([]);
-
-    function onclickHandler() {
-        electronAPI.clearClipboard();
-        dispatch({ type: REDUCER_ACTION_TYPE.CLEAR_DATA });
-    }
+    const [isPromptVisible, setIsPromptVisible] = useState<boolean>(false);
 
     function onSelectItemHandler(element: ClipboardElement): void {
         const exists = selectedItems.some(sel => sel.id === element.id);
@@ -55,6 +52,15 @@ const Local = () => {
             await setDoc(reference, { items: arrayUnion(...selectedItems) }, { merge: true });
             dispatch({ type: REDUCER_ACTION_TYPE.SHOW_POPUP, value: "Synched successfully" });
         }
+    }
+
+    function onclickHandler() {
+        setIsPromptVisible(true);
+    }
+
+    function onPromptConfirm() {
+        electronAPI.clearClipboard();
+        dispatch({ type: REDUCER_ACTION_TYPE.CLEAR_DATA });
     }
 
     useEffect(() => {
@@ -83,6 +89,12 @@ const Local = () => {
                 <Button id="clear" onClick={onclickHandler}>
                     clear all
                 </Button>
+                <Prompt
+                    message="Are you sure you want to delete all your <strong>local</strong> items ?"
+                    state={isPromptVisible}
+                    setState={setIsPromptVisible}
+                    onPromptConfirm={onPromptConfirm}
+                />
                 <div className="icons">
                     {!selectable ? (
                         <HiOutlinePencilAlt

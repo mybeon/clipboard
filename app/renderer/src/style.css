@@ -441,3 +441,13 @@ p.empty {
     border: 2px solid var(--text-color);
     transition: background-color 100ms ease-in-out;
 }
+
+.actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.actions button {
+    margin-left: 15px;
+}

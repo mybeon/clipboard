@@ -5,6 +5,7 @@ import { AuthContext } from "../../context/auth";
 import { db } from "../../firebase";
 import ListElement from "../ListElement";
 import Button from "../UI/Button";
+import Prompt from "../UI/Prompt";
 import Spinner from "../UI/Spinner";
 
 const Shared = () => {
@@ -13,6 +14,7 @@ const Shared = () => {
     } = useContext(AuthContext);
 
     const [data, setData] = useState<ClipboardElement[] | undefined>(undefined);
+    const [isPromptVisible, setIsPromptVisible] = useState<boolean>(false);
 
     useEffect(() => {
         if (!userId) return;
@@ -31,7 +33,11 @@ const Shared = () => {
         return () => unsubscribe();
     }, []);
 
-    async function onclickHandler() {
+    function onclickHandler() {
+        setIsPromptVisible(true);
+    }
+
+    async function onPromptConfirm() {
         const reference = doc(db, "clipboard", userId);
         await setDoc(reference, { items: [] });
     }
@@ -58,6 +64,12 @@ const Shared = () => {
                 <Button id="clear" onClick={onclickHandler}>
                     clear all
                 </Button>
+                <Prompt
+                    message="Are you sure you want to delete all your <strong>synched</strong> items ?"
+                    state={isPromptVisible}
+                    setState={setIsPromptVisible}
+                    onPromptConfirm={onPromptConfirm}
+                />
             </div>
             <ul id="list">
                 {data.map(el => (
