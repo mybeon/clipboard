@@ -27,7 +27,7 @@ const Prompt = ({ message, state, setState, onPromptConfirm }: Props) => {
                 <Button color="light" onClick={closeModal}>
                     cancel
                 </Button>
-                <Button className="confirm" onClick={onPromptConfirmHandler}>
+                <Button id="confirm" onClick={onPromptConfirmHandler}>
                     yes
                 </Button>
             </div>

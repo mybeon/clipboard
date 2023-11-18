@@ -7,7 +7,15 @@ interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
     isLoading?: boolean;
 }
 
-const Button = ({ children, color = "dark", icon, style, isLoading, ...props }: Props) => {
+const Button = ({
+    children,
+    color = "dark",
+    icon,
+    isLoading,
+    className,
+    style,
+    ...props
+}: Props) => {
     const isDark = color === "dark";
 
     const btnStyle: React.CSSProperties = {
@@ -19,7 +27,12 @@ const Button = ({ children, color = "dark", icon, style, isLoading, ...props }: 
     };
 
     return (
-        <button className="btn" {...props} style={btnStyle} disabled={isLoading}>
+        <button
+            className={"btn" + (className ? " " + className : "")}
+            {...props}
+            style={btnStyle}
+            disabled={isLoading}
+        >
             {isLoading ? (
                 "..."
             ) : (
