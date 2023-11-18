@@ -30,6 +30,8 @@ test("Copy multiple entries", async () => {
 test("Clear clipboard", async () => {
     const btn = await page.$("#clear");
     await btn.click();
+    const confirm = await page.$(".actions .confirm");
+    await confirm.click();
     const p = await page.$eval("p.empty", el => el.innerText);
     expect(p).toEqual("Clipboard is empty !");
 });
